@@ -1,0 +1,357 @@
+/* cool stuff
+
+// info.shipTree.tree[101].typespec.model;
+
+101 = code
+typespec.(...) all you want to know.
+
+*/
+
+var Explications = {  
+  info: {
+    Name: "Testing Area for NOK",
+    Developer: "Megalodon",
+    ShipBuiler: "NOK",
+    Version: "1.1.1"
+  },
+  text: {
+    color: "#ff0000",
+    format: "g",
+    wroten: `How to use the mod ?
+    
+  1 • You have first to put the var of your ships in the //Game category right bellow. You can also 
+  put your own admin ships in the //Admin category or your own spectator ships in the //Spectate 
+  category.
+  (The Fly, The Caliber_500 and the Spectator are already put in the mod as examples.)
+  
+  2 • Then you have to put the list of your ships in the //ShipList category just under the //Spectate 
+  categories. Be careful to write the name of the ships perfectly with their exact position in the 
+  shiptree.
+  (The Fly, The Caliber_500 and the Spectator are already put in the ship list as examples.)`
+  }
+};
+
+// Game
+var Fly_101 = '{"name":"Fly","level":1,"model":1,"size":1.05,"specs":{"shield":{"capacity":[75,100],"reload":[2,3]},"generator":{"capacity":[40,60],"reload":[10,15]},"ship":{"mass":60,"speed":[125,145],"rotation":[110,130],"acceleration":[100,120]}},"bodies":{"main":{"section_segments":12,"offset":{"x":0,"y":0,"z":10},"position":{"x":[0,0,0,0,0,0,0,0,0,0],"y":[-65,-60,-50,-20,10,30,55,75,60],"z":[0,0,0,0,0,0,0,0,0]},"width":[0,8,10,30,25,30,18,15,0],"height":[0,6,8,12,20,20,18,15,0],"propeller":true,"texture":[4,63,10,1,1,1,12,17]},"cockpit":{"section_segments":12,"offset":{"x":0,"y":0,"z":20},"position":{"x":[0,0,0,0,0,0,0],"y":[-15,0,20,30,60],"z":[0,0,0,0,0]},"width":[0,13,17,10,5],"height":[0,18,25,18,5],"propeller":false,"texture":[7,9,9,4,4]},"cannon":{"section_segments":6,"offset":{"x":0,"y":-15,"z":-10},"position":{"x":[0,0,0,0,0,0],"y":[-40,-50,-20,0,20,30],"z":[0,0,0,0,0,20]},"width":[0,5,8,11,7,0],"height":[0,5,8,11,10,0],"angle":0,"laser":{"damage":[5,6],"rate":4,"type":1,"speed":[160,180],"number":1,"error":2.5},"propeller":false,"texture":[3,3,10,3]}},"wings":{"main":{"length":[60,20],"width":[100,50,40],"angle":[-10,10],"position":[0,20,10],"doubleside":true,"offset":{"x":0,"y":10,"z":5},"bump":{"position":30,"size":20},"texture":[11,63]}},"typespec":{"name":"Fly","level":1,"model":1,"code":101,"specs":{"shield":{"capacity":[75,100],"reload":[2,3]},"generator":{"capacity":[40,60],"reload":[10,15]},"ship":{"mass":60,"speed":[125,145],"rotation":[110,130],"acceleration":[100,120]}},"shape":[1.368,1.368,1.093,0.965,0.883,0.827,0.791,0.767,0.758,0.777,0.847,0.951,1.092,1.667,1.707,1.776,1.856,1.827,1.744,1.687,1.525,1.415,1.335,1.606,1.603,1.578,1.603,1.606,1.335,1.415,1.525,1.687,1.744,1.827,1.856,1.776,1.707,1.667,1.654,0.951,0.847,0.777,0.758,0.767,0.791,0.827,0.883,0.965,1.093,1.368],"lasers":[{"x":0,"y":-1.365,"z":-0.21,"angle":0,"damage":[5,6],"rate":4,"type":1,"speed":[160,180],"number":1,"spread":0,"error":2.5,"recoil":0}],"radius":1.856}}';
+
+// Admin
+var Caliber_500_104 = '{"name":"Caliber 500","level":1,"model":4,"size":1.3,"zoom":0.8,"specs":{"shield":{"capacity":[3.01e+24,4.01e+35],"reload":[1e+39,1e+47]},"generator":{"capacity":[900,900],"reload":[900,900]},"ship":{"mass":1e+23,"speed":[400,400],"rotation":[9999999,9999999],"acceleration":[300,300],"dash":{"rate":10,"burst_speed":[2000,2000],"speed":[600,600],"acceleration":[1500,1500],"initial_energy":[1000,1],"energy":[1,1]}}},"bodies":{"body":{"section_segments":20,"offset":{"x":0,"y":0,"z":0},"position":{"x":[0,0,0,0,0,0,0,0,0,0],"y":[-219,-200,-170,-140,-110,-80,-50,0,90,80],"z":[0,0,0,0,0,0,0,0,0,0,0]},"width":[0,11.5,25.3,35.5,42.2,46,48,49,47.5,0],"height":[0,11.5,25.8,35.5,42.2,46,48,49,47.5,0],"texture":[5],"propeller":0,"laser":{"damage":[25,3000],"rate":10,"type":1,"speed":[700,700],"number":4,"error":0}}},"typespec":{"name":"caliber 500","level":1,"model":4,"code":104,"specs":{"shield":{"capacity":[3.01e+24,4.01e+35],"reload":[1e+39,1e+47]},"generator":{"capacity":[900,900],"reload":[900,900]},"ship":{"mass":1e+23,"speed":[400,400],"rotation":[9999999,9999999],"acceleration":[300,300],"dash":{"rate":10,"burst_speed":[2000,2000],"speed":[600,600],"acceleration":[1500,1500],"initial_energy":[1000,1],"energy":[1,1]}}},"shape":[5.694,5.156,4.143,3.327,2.697,2.252,1.933,1.713,1.551,1.436,1.357,1.309,1.28,1.279,1.305,1.358,1.433,1.555,1.715,1.95,2.305,2.646,2.586,2.46,2.382,2.344,2.382,2.46,2.586,2.646,2.305,1.95,1.715,1.555,1.433,1.358,1.305,1.279,1.28,1.309,1.357,1.436,1.551,1.713,1.933,2.252,2.697,3.327,4.143,5.156],"lasers":[{"x":0,"y":-5.694,"z":0,"angle":0,"damage":[25,3000],"rate":10,"type":1,"speed":[700,700],"number":4,"spread":0,"error":0,"recoil":0}],"radius":5.694}}';
+
+// Spectate
+var Spectator_102 = '{"name":"Spectator","level":1,"model":2,"size":0.025,"zoom":0.075,"specs":{"shield":{"capacity":[1e-30,1e-30],"reload":[1e-30,1e-30]},"generator":{"capacity":[900,900],"reload":[9999999,9999999]},"ship":{"mass":1,"speed":[200,200],"rotation":[1000,1000],"acceleration":[1000,1000],"dash":{"rate":10,"burst_speed":[2000,2000],"speed":[600,600],"acceleration":[1500,1500],"initial_energy":[1,1],"energy":[1,1]}}},"bodies":{"face":{"section_segments":100,"angle":0,"offset":{"x":0,"y":0,"z":0},"position":{"x":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"y":[-2,-2,2,2],"z":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},"width":[0,0,0,0],"height":[0,1,0,0],"vertical":true,"texture":[6]}},"typespec":{"name":"Spectator","level":1,"model":2,"code":102,"specs":{"shield":{"capacity":[1e-30,1e-30],"reload":[1e-30,1e-30]},"generator":{"capacity":[900,900],"reload":[9999999,9999999]},"ship":{"mass":1,"speed":[200,200],"rotation":[1000,1000],"acceleration":[1000,1000],"dash":{"rate":10,"burst_speed":[2000,2000],"speed":[600,600],"acceleration":[1500,1500],"initial_energy":[1,1],"energy":[1,1]}}},"shape":[0.001,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.001,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"lasers":[],"radius":0.001}}';
+
+// ShipList
+
+var ships = [Fly_101];
+var admins = [Caliber_500_104];
+var spec = [Spectator_102];
+
+//  ----  //
+
+var info = {
+  shipTree: { codes: [], tree: {} },
+  adminTree: { codes: [], tree: {} },
+  spectator: { codes: [], tree: {} }
+};
+
+var buttons = {  
+  "admin": {
+    position: { x: 2, y: 60 },
+    color: { text: "#ff0000", fill: "rgba(255,0,0,0.2)", stroke: "#ff0000" },
+    shortcut: "Z"
+  },
+  "spectate": {
+    position: { x: 2, y: 40 },
+    color: { text: "#ceff00", fill: "rgba(206,255,0,0.2)", stroke: "#ceff00" },
+    shortcut: "A"
+  },
+  "switch_next": {
+    position: { x: 2, y: 30 },
+    color: { text: "#00b7ff", fill: "rgba(0,183,255,0.2)", stroke: "#00b7ff" },
+    shortcut: "V"
+  },
+  "switch_prev": {
+    position: { x: 8, y: 30 },
+    color: { text: "#00b7ff", fill: "rgba(0,183,255,0.2)", stroke: "#00b7ff" },
+    shortcut: "W"
+  },
+  "restore": {
+    position: { x: 2, y: 50 },
+    color: { text: "#00ff10", fill: "rgba(0,255,16,0.2)", stroke: "#00ff10" },
+    shortcut: "M"
+  },
+  "reset": {
+    position: { x: 8, y: 50 },
+    color: { text: "#fff", fill: "rgba(255,255,255,0.2)", stroke: "#fff" },
+    shortcut: "J"
+  },
+  "stats": {
+    position: { x: 8, y: 40 },
+    color: { text: "#ffbc00", fill: "rgba(255,188,0,0.2)", stroke: "#ffbc00" },
+    shortcut: "I"
+  }
+};
+
+var map =
+"     865     39     86     539           6439          7643 \n"+
+"399    976     3     987           298      5     298     75\n"+
+"  429           532     9    96       99     65     399     \n"+
+"          997      4             6 9           754          \n"+
+"    7542     9     7       2             329     6     539  \n"+
+"98     95   9        7             9             9976     4 \n"+
+" 398     6     4             5        8     54      98     5\n"+
+"    9     86      3             5             643     97    \n"+
+"    4399     7             8             9            7298  \n"+
+"75     42            5             6       9     86539    9 \n"+
+" 97     5      9             3        6      9      75  9  2\n"+
+"   97    75            8        2             32     86     \n"+
+"    998                   7             9         9   9976  \n"+
+"43     9             2             4             54      9  \n"+
+" 65           78             9  7          9      7 4     9 \n"+
+"   6     4             6        8             98  7  5      \n"+
+"    87      4             5             6             86    \n"+
+"99          6                     3             439    9    \n"+
+" 4             5             7             8             98 \n"+
+"  53     9             3             5        7     4       \n"+
+"  976            9        2             4             54    \n"+
+"86    6             8             9             99    7     \n"+
+" 9                                        76       9     7  \n"+
+" 42      8             9             2             3        \n"+
+"3                6             7        9             3     \n"+
+"      4    2        5             7             8           \n"+
+" 86      3                  3             5          9  64  \n"+
+"    7       7                                4           9 5\n"+
+"9 9         5                  5         7                  \n"+
+"3     9             3        5    4             6           \n"+
+"754      9             2                  2             3   \n"+
+"   64            7             9                  9        3\n"+
+"      7                           8                  8      \n"+
+"9     9             9                                  9    \n"+
+"439      7             8             9             2    98  \n"+
+"   32            5             6             8        9     \n"+
+"    4      9             3             4        7     4     \n"+
+"  9   5                     2             3             539 \n"+
+"998           3        6                           9  9     \n"+
+"   9             2             4             5             6\n"+
+"    2      86            9             9        4     99    \n"+
+"4 7  439           6        8             9             298 \n"+
+"875           9                     6             865   7 9 \n"+
+"        64       9             9             3        9    4\n"+
+"   987     54            7             8             9865   \n"+
+"     998           3             4        7     4       97  \n"+
+"642 9        87       2             4             5429    8 \n"+
+"        32       6                          99          7 39\n"+
+"  9764     7             4             5             754    \n"+
+"  9  87            9             2             399      6   \n"+
+"39     8     64            7        9     7       39     75 \n"+
+"  2  9 7987     5            97             865     2     98\n"+
+"  6539     9                           3            6939 9  \n"+
+"  9  64     9      7             8             9875     3   \n"+
+"9     75     32         9995        8     53  9   97     4  \n"+
+" 99 7  976 9         9        4     9       54     99     75\n"+
+"  4298    8     54      98   9        298     5     9998    \n"+
+"     3     9       43            64            76999   2    \n"+
+"7     42     989       9   29    7       429     96     32  \n"+
+" 86    653        9  86       9     864     39     76     43";
+
+var vocabulary = [
+  { text: "Hello", icon:"\u0045", key:"H" },
+  { text: "Yes", icon:"\u004c", key:"Y" },
+  { text: "No", icon:"\u004d", key:"N" },
+  { text: "No Prob", icon:"\u0047", key:"P" },
+  { text: "Thanks", icon:"\u0041", key:"X" },
+  { text: "Follow", icon:"\u0050", key:"F" },
+  { text: "Sorry", icon:"\u00a1", key:"S" },
+  { text: "Good Game", icon:"\u00a3", key:"G" },
+  { text: "Attendre", icon:"\u0048", key:"T" },
+  { text: "Hmm", icon:"\u004b", key:"Q" },
+  { text: "Kill", icon:"\u005b", key:"K" },
+  { text: "moi", icon:"\u003f", key:"E" },
+  { text: "toi", icon:"\u003e", key:"O" },
+  { text: "duel", icon:"\u00be", key:"D" },
+  { text: "Love U", icon:"\u0049", key:"L" },
+  { text: "Bye <3", icon:"\u00b3", key:"B" },
+];
+
+this.options = {
+  root_mode: "",
+  map_name: Explications.info.Name,
+  soundtrack: "civilisation.mp3",
+  starting_ship: 801,
+  map_size: 60,
+  weapons_store: false,
+  reset_tree: true,
+  radar_zoom: 1,
+  asteroids_strength: 1.3,
+  crystal_value: 3,
+  
+  ships: ships.concat(admins.concat(spec)),
+  custom_map: map,
+  vocabulary: vocabulary
+};
+
+const utilities = {
+  buildShiptree: function() {
+    ships.forEach((str) => {
+      const data = JSON.parse(str);
+      const stats = info.shipTree;
+      stats.tree[data.typespec.code.toString()] = data;
+      stats.codes.push(Number(data.typespec.code));
+    });
+    admins.forEach((str) => {
+      const data = JSON.parse(str);
+      const stats = info.adminTree;
+      stats.tree[data.typespec.code.toString()] = data;
+      stats.codes.push(Number(data.typespec.code));
+    });
+    spec.forEach((str) => {
+      const data = JSON.parse(str);
+      const stats = info.spectator;
+      stats.tree[data.typespec.code.toString()] = data;
+      stats.codes.push(Number(data.typespec.code));
+    });
+  },
+  buildButtons: function() {
+    Object.entries(buttons).forEach(([key, info]) => {
+      buttons[key] = {
+        id: key,
+        position: [info.position.x, info.position.y, 5, 7],
+        clickable: true,
+        visible: true,
+        shortcut: info.shortcut.toUpperCase(),
+        components: [
+          { type:  "box", position:[0,0,100,100], fill: info.color.fill , stroke: info.color.stroke,width:6},
+          { type: "text", position:[0,15,100,30], value: (key.includes("_"))?key.match(/([^_]+)_([^_]+)/)[2]:key, color: info.color.text},
+          { type: "text", position:[0,60,100,20], value: `[${info.shortcut.toUpperCase()}]`, color: info.color.text}
+        ]
+      };
+    });
+  },
+  stateInitialize: function() {
+    const { echo } = game.modding.terminal;
+    const maxLength = Math.max(...Object.keys(Explications.info).map(key => key.length));
+    echo(`\n[[i;#ff7070;]  Staring % Initializing...]\n`);
+    Object.keys(Explications.info).forEach((key, index) => {
+      const formattedKey = `${key.charAt(0).toUpperCase() + key.substring(1)}:`.padEnd(maxLength + 2);
+      echo(`[[i;Cyan;]     ${formattedKey}] [[i;Gold;]${Explications.info[key]}]`);
+      (index === 2) && echo(' ');
+    });
+    echo(`\n[[${Explications.text.format};${Explications.text.color};]  ${Explications.text.wroten}`);
+    echo(`[[i;#85ff70;]  Started % Log-enabled\n`);
+  },
+  functions: {
+    admin: function(ship, select = null) {
+      if (select) {
+        ship.custom.isAdmin = true;
+        ship.setUIComponent();
+      } else if (select === "remove") {
+        ship.custom.isAdmin = false;
+        ship.setUIComponent({ id: "admin", visible: false });
+      }
+      if (info.spectator.codes.includes(ship.type) || info.shipTree.codes.includes(ship.type)) {
+        nextShip = info.adminTree.codes[0];
+      } else {
+        let index = info.adminTree.codes.indexOf(ship.type);
+        if (index >= 0) nextShip = info.adminTree.codes[(index + 1) % info.adminTree.codes.length];
+        ship.custom.lastAdminShip = nextShip;
+      }
+      ship.set({
+        type: nextShip, shield: 999, collider: true,
+        stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(nextShip / 100):0,
+        crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2)
+      });
+    },
+    spectate: function(ship) {
+      if (ship.custom.spectating) {
+        ship.custom.spectating = false;
+        nextShip = ship.custom.lastShip;
+      } else {
+        ship.custom.spectating = true;
+        nextShip = info.spectator.codes[0];
+      }
+      ship.set({
+        type: nextShip, shield: 999, 
+        collider: info.spectator.codes.includes(nextShip)?false:true,
+        stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(nextShip / 100):0,
+        crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2)
+      });
+    },
+    switch: function(ship, select) {
+      if (info.spectator.codes.includes(ship.type) || info.adminTree.codes.includes(ship.type)) {
+        nextShip = ship.custom.lastShip;
+      } else {
+        let index = info.shipTree.codes.indexOf(ship.type);
+        switch(select) {
+          case "next": if (index >= 0) nextShip = info.shipTree.codes[(index + 1) % info.shipTree.codes.length]; break;
+          case "prev": if (index !== -1) nextShip = info.shipTree.codes[(index - 1 + info.shipTree.codes.length) % info.shipTree.codes.length]; break;
+        }
+        ship.custom.lastShip = nextShip;
+        ship.set({
+          type: nextShip, shield: 9999, collider: true,
+          stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(nextShip / 100):0,
+          crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2)
+        });
+      }
+    },
+    restore: function(ship) {
+      ship.set({
+        shield: 999,
+        stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(ship.type / 100):0,
+        crystals: 20 * Math.pow(Math.trunc(ship.type / 100), 2)
+      });
+    },
+    reset: function(ship) {
+      ship.set({
+        type: info.shipTree.codes[0], shield: 999,
+        stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(info.shipTree.codes[0] / 100):0,
+        crystals: 20 * Math.pow(Math.trunc(info.shipTree.codes[0] / 100), 2)
+      });
+    },
+    stats: function(ship) {
+      var level = Math.trunc(ship.type / 100); 
+      var max = 11111111 * level;
+      if (level < 7) {
+        if (ship.stats == max) {
+          ship.custom.keep_maxed = false;
+          ship.set({stats: 0});
+        } else {
+          ship.custom.keep_maxed = true;
+          ship.set({stats: 11111111 * level});
+        }
+      }
+    }
+  }
+};
+
+this.event = function(event, game) {
+  switch(event.name) {
+    case "ui_component_clicked":
+      if (!event.id.includes("_")) {
+        utilities.functions[event.id](event.ship);
+      } else {
+        var source = event.id.match(/([^_]+)_([^_]+)/);
+        utilities.functions[source[1]](event.ship, source[2]);
+      }
+      break;
+    case "ship_spawned":
+      if (!event.ship.custom.init) {
+        Object.values(buttons).filter(key => key.id != "admin").forEach(key => event.ship.setUIComponent(key));
+        if (!event.ship.custom.isAdmin && event.ship.id === 1) {
+          event.ship.custom.isAdmin = true;
+          event.ship.setUIComponent(buttons[`admin`]);
+        }
+      }
+      utilities.functions.stats(event.ship);
+      break;
+  }
+};
+
+function readyGame(game) {
+  if (!game.custom.started) {
+    //game.custom.started = true;
+    utilities.buildShiptree();
+    utilities.buildButtons();
+    utilities.stateInitialize();
+  }
+}
+readyGame(game);
