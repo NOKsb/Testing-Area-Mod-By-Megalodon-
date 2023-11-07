@@ -8,7 +8,7 @@ var infos = {
 var delays = { // en secondes
   spectate: 1.5,
   swich: 0,
-  restore: 0,
+  restore: 2,
   reset: 0,
   stats: 0
 };
