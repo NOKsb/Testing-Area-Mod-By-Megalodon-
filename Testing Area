@@ -1,34 +1,24 @@
-/* cool stuff
-
-// info.shipTree.tree[101].typespec.model;
-
-101 = code
-typespec.(...) all you want to know.
-
-*/
-
-var Explications = {  
-  info: {
-    Name: "Testing Area for NOK",
-    Developer: "Megalodon",
-    ShipBuiler: "NOK",
-    Version: "1.1.1"
-  },
-  text: {
-    color: "#ff0000",
-    format: "g",
-    wroten: `How to use the mod ?
-    
-  1 • You have first to put the var of your ships in the //Game category right bellow. You can also 
-  put your own admin ships in the //Admin category or your own spectator ships in the //Spectate 
-  category.
-  (The Fly, The Caliber_500 and the Spectator are already put in the mod as examples.)
+  //1 • You have first to put the var of your ships in the //Game category right bellow. You can also 
+  //put your own admin ships in the //Admin category or your own spectator ships in the //Spectate 
+  //category.
+  //(The Fly, The Caliber_500 and the Spectator are already put in the mod as examples.)
   
-  2 • Then you have to put the list of your ships in the //ShipList category just under the //Spectate 
-  categories. Be careful to write the name of the ships perfectly with their exact position in the 
-  shiptree.
-  (The Fly, The Caliber_500 and the Spectator are already put in the ship list as examples.)`
-  }
+  //2 • Then you have to put the list of your ships in the //ShipList category just under the //Spectate 
+  //categories. Be careful to write the name of the ships perfectly with their exact position in the 
+  //shiptree.
+  //(The Fly, The Caliber_500 and the Spectator are already put in the ship list as examples.)
+
+var infos = {
+  Name: "Test Mod",
+  Developer: "Megalodon"
+};
+
+var delays = { // en secondes
+  spectate: 1.5,
+  swich: 0,
+  restore: 0,
+  reset: 0,
+  stats: 0
 };
 
 // Game
@@ -175,7 +165,7 @@ var vocabulary = [
 
 this.options = {
   root_mode: "",
-  map_name: Explications.info.Name,
+  map_name: info.Name,
   soundtrack: "civilisation.mp3",
   starting_ship: 801,
   map_size: 60,
@@ -229,15 +219,15 @@ const utilities = {
   },
   stateInitialize: function() {
     const { echo } = game.modding.terminal;
-    const maxLength = Math.max(...Object.keys(Explications.info).map(key => key.length));
-    echo(`\n[[i;#ff7070;]  Staring % Initializing...]\n`);
-    Object.keys(Explications.info).forEach((key, index) => {
+    const maxLength = Math.max(...Object.keys(infos).map(key => key.length));
+    echo(`\n[[i;#ff7070;]  Starting % Initializing...]\n`);
+    Object.keys(infos).forEach((key, index) => {
       const formattedKey = `${key.charAt(0).toUpperCase() + key.substring(1)}:`.padEnd(maxLength + 2);
-      echo(`[[i;Cyan;]     ${formattedKey}] [[i;Gold;]${Explications.info[key]}]`);
-      (index === 2) && echo(' ');
+      const formattedValue = infos[key];
+      echo(`[[i;Cyan;]     ${formattedKey}] [[i;Gold;]${formattedValue}]`);
+      if (index == 2) echo(' ');
     });
-    echo(`\n[[${Explications.text.format};${Explications.text.color};]  ${Explications.text.wroten}`);
-    echo(`[[i;#85ff70;]  Started % Log-enabled\n`);
+    echo(`\n[[i;#85ff70;]  Started % Log-enabled\n`);
   },
   functions: {
     admin: function(ship, select = null) {
@@ -262,61 +252,79 @@ const utilities = {
       });
     },
     spectate: function(ship) {
-      if (ship.custom.spectating) {
-        ship.custom.spectating = false;
-        nextShip = ship.custom.lastShip;
-      } else {
-        ship.custom.spectating = true;
-        nextShip = info.spectator.codes[0];
-      }
-      ship.set({
-        type: nextShip, shield: 999, 
-        collider: info.spectator.codes.includes(nextShip)?false:true,
-        stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(nextShip / 100):0,
-        crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2)
-      });
-    },
-    switch: function(ship, select) {
-      if (info.spectator.codes.includes(ship.type) || info.adminTree.codes.includes(ship.type)) {
-        nextShip = ship.custom.lastShip;
-      } else {
-        let index = info.shipTree.codes.indexOf(ship.type);
-        switch(select) {
-          case "next": if (index >= 0) nextShip = info.shipTree.codes[(index + 1) % info.shipTree.codes.length]; break;
-          case "prev": if (index !== -1) nextShip = info.shipTree.codes[(index - 1 + info.shipTree.codes.length) % info.shipTree.codes.length]; break;
+      if (!ship.custom.spectate || game.step >= ship.custom.spectate) {
+        ship.custom.spectate = game.step + delays.spectate * 60;
+        if (ship.custom.spectating) {
+          ship.custom.spectating = false;
+          nextShip = ship.custom.lastShip;
+        } else {
+          ship.custom.spectating = true;
+          nextShip = info.spectator.codes[0];
+          ship.custom.lastShip = ship.type;
         }
-        ship.custom.lastShip = nextShip;
         ship.set({
-          type: nextShip, shield: 9999, collider: true,
+          type: nextShip, shield: 999, 
+          collider: !ship.custom.spectating,
           stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(nextShip / 100):0,
-          crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2)
+          crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2),
+          vx: 0, vy: 0, generator: 0
         });
       }
     },
+    switch: function(ship, select) {
+      if (!ship.custom.swich || game.step >= ship.custom.swich) {
+        ship.custom.swich = game.step + delays.swich * 60;
+        if (info.spectator.codes.includes(ship.type) || info.adminTree.codes.includes(ship.type)) {
+          this.spectate(ship);
+        } else {
+          let index = info.shipTree.codes.indexOf(ship.type);
+          switch(select) {
+            case "next": if (index >= 0) nextShip = info.shipTree.codes[(index + 1) % info.shipTree.codes.length]; break;
+            case "prev": if (index !== -1) nextShip = info.shipTree.codes[(index - 1 + info.shipTree.codes.length) % info.shipTree.codes.length]; break;
+          }
+          ship.custom.lastShip = nextShip;
+          ship.set({
+            type: nextShip, shield: 9999, collider: true,
+            stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(nextShip / 100):0,
+            crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2)
+          });
+        }
+      }
+    },
     restore: function(ship) {
-      ship.set({
-        shield: 999,
-        stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(ship.type / 100):0,
-        crystals: 20 * Math.pow(Math.trunc(ship.type / 100), 2)
-      });
+      if (!ship.custom.restore || game.step >= ship.custom.restore) {
+        ship.custom.restore = game.step + delays.restore * 60;
+        ship.set({
+          shield: 999,
+          stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(ship.type / 100):0,
+          crystals: 20 * Math.pow(Math.trunc(ship.type / 100), 2)
+        });
+      }
     },
     reset: function(ship) {
-      ship.set({
-        type: info.shipTree.codes[0], shield: 999,
-        stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(info.shipTree.codes[0] / 100):0,
-        crystals: 20 * Math.pow(Math.trunc(info.shipTree.codes[0] / 100), 2)
-      });
+      if (!ship.custom.reset || game.step >= ship.custom.reset) {
+        ship.custom.reset = game.step + delays.reset * 60;
+        if (ship.custom.spectating) ship.custom.spectating = false;
+        ship.set({
+          type: info.shipTree.codes[0], shield: 999,
+          stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(info.shipTree.codes[0] / 100):0,
+          crystals: 20 * Math.pow(Math.trunc(info.shipTree.codes[0] / 100), 2)
+        });
+      }
     },
     stats: function(ship) {
-      var level = Math.trunc(ship.type / 100); 
-      var max = 11111111 * level;
-      if (level < 7) {
-        if (ship.stats == max) {
-          ship.custom.keep_maxed = false;
-          ship.set({stats: 0});
-        } else {
-          ship.custom.keep_maxed = true;
-          ship.set({stats: 11111111 * level});
+      if (!ship.custom.stats || game.step >= ship.custom.stats) {
+        ship.custom.stats = game.step + delays.stats * 60;
+        var level = Math.trunc(ship.type / 100); 
+        var max = 11111111 * level;
+        if (level < 7) {
+          if (ship.stats == max) {
+            ship.custom.keep_maxed = false;
+            ship.set({stats: 0});
+          } else {
+            ship.custom.keep_maxed = true;
+            ship.set({stats: 11111111 * level});
+          }
         }
       }
     }
@@ -346,12 +354,6 @@ this.event = function(event, game) {
   }
 };
 
-function readyGame(game) {
-  if (!game.custom.started) {
-    //game.custom.started = true;
-    utilities.buildShiptree();
-    utilities.buildButtons();
-    utilities.stateInitialize();
-  }
-}
-readyGame(game);
+utilities.buildShiptree();
+utilities.buildButtons();
+utilities.stateInitialize();
