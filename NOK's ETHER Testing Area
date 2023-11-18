@@ -8,7 +8,7 @@ var infos = {
 var delays = { // en secondes
   spectate: 1.5,
   swich: 0,
-  restore: 2,
+  restore: 0,
   reset: 0,
   stats: 0
 };
@@ -302,9 +302,10 @@ const utilities = {
         }
         ship.set({
           type: nextShip, shield: 999, 
-          collider: info.spectator.codes.includes(nextShip)?false:true,
+          collider: !ship.custom.spectating,
           stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(nextShip / 100):0,
-          crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2)
+          crystals: 20 * Math.pow(Math.trunc(nextShip / 100), 2),
+          vx: 0, vy: 0, generator: 0
         });
       }
     },
@@ -312,7 +313,7 @@ const utilities = {
       if (!ship.custom.swich || game.step >= ship.custom.swich) {
         ship.custom.swich = game.step + delays.swich * 60;
         if (info.spectator.codes.includes(ship.type) || info.adminTree.codes.includes(ship.type)) {
-          nextShip = ship.custom.lastShip;
+          this.spectate(ship);
         } else {
           let index = info.shipTree.codes.indexOf(ship.type);
           switch(select) {
@@ -341,6 +342,7 @@ const utilities = {
     reset: function(ship) {
       if (!ship.custom.reset || game.step >= ship.custom.reset) {
         ship.custom.reset = game.step + delays.reset * 60;
+        if (ship.custom.spectating) ship.custom.spectating = false;
         ship.set({
           type: info.shipTree.codes[0], shield: 999,
           stats: ship.custom.keep_maxed ? 11111111 * Math.trunc(info.shipTree.codes[0] / 100):0,
